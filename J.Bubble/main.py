@@ -2,7 +2,7 @@ from typing import List, Tuple
 
 
 def load_data() -> Tuple[int, List[int]]:
-    file = open('./input.txt', 'rt')
+    file = open('./J.Bubble/input.txt', 'rt')
     length = int(file.readline())
     data = [int(x) for x in file.readline().split()]
     return length, data
@@ -10,17 +10,27 @@ def load_data() -> Tuple[int, List[int]]:
 
 def bubble_sort(length: int, digits: List[int]):
     index = length - 1
+    idx = length - 1
+    check = [False for x in range(length-1)]
+    total_count = 0
     while index != 0:
-        for x in range(length-1):
-            if digits[x] > digits[x+1] and (x+1) != length:
-                tmp = digits[x+1]
-                digits[x+1] = digits[x]
-                digits[x] = tmp
-            elif x == length-2:
+        inner = 0
+        while inner < idx:
+            if digits[inner] > digits[inner+1]:
+                tmp = digits[inner+1]
+                digits[inner+1] = digits[inner]
+                digits[inner] = tmp
+                check[inner] = True
+            
+            inner += 1
+
+            if inner == idx:
+                idx -= 1
                 print(' '.join(map(str, digits)))
-                index = 1
-        length -= 1
-        index -= 1
+                index -= 1
+        if index == length - 2:
+            index = sum(check) - 1
+
 
 
 if __name__ == '__main__':
