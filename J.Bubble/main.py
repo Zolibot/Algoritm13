@@ -13,7 +13,7 @@ def bubble_sort(length: int, digits: List[int]) -> None:
     idx: int = length - 1
 
     while index != 0:
-        inner = 0
+        inner: int = 0
         check: int = 0
         while inner < idx:
             if digits[inner] > digits[inner+1]:
