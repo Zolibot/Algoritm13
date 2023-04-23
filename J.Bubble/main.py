@@ -12,7 +12,6 @@ def bubble_sort(length: int, digits: List[int]):
     index = length - 1
     idx = length - 1
     check = [False for x in range(length-1)]
-    total_count = 0
     while index != 0:
         inner = 0
         while inner < idx:
@@ -21,7 +20,7 @@ def bubble_sort(length: int, digits: List[int]):
                 digits[inner+1] = digits[inner]
                 digits[inner] = tmp
                 check[inner] = True
-            
+
             inner += 1
 
             if inner == idx:
@@ -30,7 +29,6 @@ def bubble_sort(length: int, digits: List[int]):
                 index -= 1
         if index == length - 2:
             index = sum(check) - 1
-
 
 
 if __name__ == '__main__':
