@@ -2,7 +2,7 @@ from typing import List, Tuple, Callable
 
 
 def load_data() -> Tuple[int, List[int]]:
-    file = open('./H.LargeNumber/input.txt', 'rt')
+    file = open('./input.txt', 'rt')
     length = int(file.readline())
     data = [int(x) for x in file.readline().split()]
     return length, data
@@ -10,25 +10,38 @@ def load_data() -> Tuple[int, List[int]]:
 
 def get_number_digit(number: int) -> int:
     prev = number
-    while bin(number).count('1') > 0:
+    index = 0
+    while number > 0:
+        prev = number
+        number = number // 10
+        index += 1
+    return index
+
+
+def get_last_digit(number: int) -> int:
+    prev = number
+    while number > 0:
         prev = number
         number = number // 10
     return prev
 
 
 def summa(num: int) -> int:
-    return sum(list(map(int, str(num)))) / bin(num).count('1')
+    x = get_number_digit(num)
+    return sum(list(map(int, str(num)))) / x
 
 
 def compare(num1: int, num2: int) -> bool:
-    if get_number_digit(num1) == get_number_digit(num2):
-        sum1 = summa(num1)
-        sum2 = summa(num2)
+    sum1 = summa(num1)
+    sum2 = summa(num2)
 
-        if sum1 > sum2:
-            return True
+    s1 = get_last_digit(num1)
+    s2 = get_last_digit(num2)
 
-    return get_number_digit(num1) > get_number_digit(num2)
+    if s1 == s2:
+        return sum1 > sum2
+
+    return s1 > s2
 
 
 def sort_by_compare(size: int, arr: List[int], func: Callable) -> List[int]:
@@ -57,14 +70,16 @@ def load_data1(file: str) -> Tuple[int, List[int]]:
 
 if __name__ == '__main__':
     size, arr = load_data()
-    size, arr = load_data1(test1)
+    # size, arr = load_data1(test1)
     result = sort_by_compare(size, arr, compare)
     print(''.join(map(str, result)))
-    print(result)
-    size, arr = load_data1(test2)
-    result = sort_by_compare(size, arr, compare)
-    print(''.join(map(str, result)))
-    print(result)
-
-    print(summa(64), summa(6))
-    print(bin(4).count('1'))
+    # print(result)
+    # size, arr = load_data1(test2)
+    # result = sort_by_compare(size, arr, compare)
+    # print(''.join(map(str, result)))
+    # print(result)
+    #
+    # print(summa(17), summa(18))
+    # s1 = get_last_digit(17)
+    # s2 = get_last_digit(18)
+    # print(s1, s2)
