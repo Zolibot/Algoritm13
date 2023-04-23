@@ -8,26 +8,26 @@ def load_data() -> Tuple[int, List[int]]:
     return length, data
 
 
-def bubble_sort(length: int, digits: List[int]):
-    index = length - 1
-    idx = length - 1
-    check = [False for x in range(length-1)]
+def bubble_sort(length: int, digits: List[int]) -> None:
+    one_iter: int = length - 2
+    index: int = length - 1
+    idx: int = length - 1
+    check: List[bool] = [False for x in range(length-1)]
     while index != 0:
         inner = 0
         while inner < idx:
             if digits[inner] > digits[inner+1]:
-                tmp = digits[inner+1]
-                digits[inner+1] = digits[inner]
-                digits[inner] = tmp
+                # tmp = digits[inner+1]
+                # digits[inner+1] = digits[inner]
+                # digits[inner] = tmp
+                digits[inner+1], digits[inner] = digits[inner], digits[inner+1]
                 check[inner] = True
-
             inner += 1
-
             if inner == idx:
                 idx -= 1
-                print(' '.join(map(str, digits)))
                 index -= 1
-        if index == length - 2:
+                print(' '.join(map(str, digits)))
+        if index == one_iter:
             index = sum(check) - 1
 
 
