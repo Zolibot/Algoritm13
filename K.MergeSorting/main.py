@@ -2,7 +2,7 @@ def merge(arr, lf, mid, rg):
     left = arr[lf: mid]
     right = arr[mid: rg]
 
-    result = [None] * len(arr)
+    result = []
 
     size_left = len(left)
     size_right = len(right)
@@ -13,23 +13,24 @@ def merge(arr, lf, mid, rg):
 
     while left_idx < size_left and right_idx < size_right:
         if left[left_idx] <= right[right_idx]:
-            result[result_idx] = left[left_idx]
+            result.append(left[left_idx])
             left_idx += 1
         else:
-            result[result_idx] = right[right_idx]
+            result.append(right[right_idx])
             right_idx += 1
         result_idx += 1
 
     while left_idx < size_left:
-        result[result_idx] = left[left_idx]
+        result.append(left[left_idx])
         left_idx += 1
         result_idx += 1
+
     while right_idx < size_right:
-        result[result_idx] = right[right_idx]
+        result.append(right[right_idx])
         right_idx += 1
         result_idx += 1
 
-    return result[0:result_idx]
+    return result
 
 
 def merge_sort(arr, lf, rg):
