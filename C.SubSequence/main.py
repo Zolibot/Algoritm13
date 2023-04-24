@@ -1,8 +1,8 @@
-from typing import List, Tuple
+from typing import Tuple
 
 
-def load_data() -> Tuple[int, List[int]]:
-    file = open('./C.SubSequence/input.txt', 'rt')
+def load_data() -> Tuple[str, str]:
+    file = open('./input.txt', 'rt')
     s1 = file.readline()
     s2 = file.readline()
     return s1, s2
