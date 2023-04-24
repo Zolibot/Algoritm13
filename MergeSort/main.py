@@ -9,7 +9,7 @@ def merge_sort(array):
     right = merge_sort(array[len(array) // 2: len(array)])
 
     # заводим массив для результата сортировки
-    result = [] * len(array)
+    result = [0] * len(array)
 
     # сливаем результаты
     l, r, k = 0, 0, 0
@@ -21,7 +21,7 @@ def merge_sort(array):
         else:
             result[k] = right[r]
             r += 1
-            k += 1
+        k += 1
 
     # Если один массив закончился раньше, чем второй, то
     # переносим оставшиеся элементы второго массива в результирующий

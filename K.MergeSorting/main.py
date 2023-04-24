@@ -29,20 +29,15 @@ def merge(arr, lf, mid, rg):
         right_idx += 1
         result_idx += 1
 
-    return result
+    return result[0:result_idx]
 
 
 def merge_sort(arr, lf, rg):
-    if len(arr) == 1:
-        return arr
-    left = arr[lf: mid]
-    right = arr[mid: rg]
-
-
-
-
-
-    pass
+    if rg - lf >= 2:
+        mid = (lf + rg) // 2
+        merge_sort(arr, lf, mid)
+        merge_sort(arr, mid, rg)
+        arr[lf:rg] = merge(arr, lf, mid, rg)
 
 
 def test():
@@ -55,6 +50,3 @@ def test():
     expected = [1, 1, 2, 2, 4, 10]
     assert c == expected
 
-
-if __name__ == '__main__':
-    test()
