@@ -19,7 +19,6 @@ def bubble_sort(length: int, digits: List[int]) -> None:
             if digits[inner] > digits[inner+1]:
                 digits[inner+1], digits[inner] = digits[inner], digits[inner+1]
                 check += 1
-
             inner += 1
             if inner == idx:
                 if check == 0:
@@ -28,7 +27,6 @@ def bubble_sort(length: int, digits: List[int]) -> None:
                     return
                 idx -= 1
                 index -= 1
-
                 print(' '.join(map(str, digits)))
 
 

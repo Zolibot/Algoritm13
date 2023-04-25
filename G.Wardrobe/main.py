@@ -9,16 +9,17 @@ def load_data() -> Tuple[int, List[int]]:
 
 
 def counting_sort(length: int, arr: List[int]) -> List[int]:
-    if length <= 1 :
+    if length <= 1:
         return None
     counted_values: List[int] = [0] * (max(arr) + 1)
 
     for item in arr:
         counted_values[item] += 1
 
-    result = [num for num, count in enumerate(counted_values) for i in range(count)]
+    result = [
+        num for num, count in enumerate(counted_values) for i in range(count)
+    ]
     return result
-
 
 
 if __name__ == '__main__':
@@ -26,5 +27,3 @@ if __name__ == '__main__':
     s = counting_sort(size, data)
     if s:
         print(' '.join(map(str, s)))
-    
-
