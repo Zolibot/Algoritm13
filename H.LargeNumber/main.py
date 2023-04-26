@@ -25,13 +25,6 @@ def sort_by_compare(size: int, arr: List[int], func: Callable) -> List[int]:
     return arr
 
 
-def load_data1(file: str) -> Tuple[int, List[int]]:
-    file = file.split('\n')
-    length = int(file[0])
-    data = [int(x) for x in file[1].split()]
-    return length, data
-
-
 if __name__ == '__main__':
     size, arr = load_data()
     result = sort_by_compare(size, arr, compare)
