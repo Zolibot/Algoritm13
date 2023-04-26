@@ -1,14 +1,6 @@
 from typing import List, Tuple
 
 
-def load_data() -> Tuple[int, int, List[int]]:
-    file = open('./input.txt', 'rt')
-    size: int = int(file.readline())
-    number: int = int(file.readline())
-    arr: List[int] = [int(x) for x in file.readline().split()]
-    return size, number, arr
-
-
 def is_between(number: int, arr: List[int]) -> bool:
     return arr[0] <= number <= arr[-1]
 
@@ -65,9 +57,5 @@ def test():
     assert broken_search(arr, 5) == 4
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test()
-    _, num, data = load_data()
-    s = broken_search(data, num)
-    print(s)
-
