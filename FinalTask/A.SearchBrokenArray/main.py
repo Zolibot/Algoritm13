@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List
 
 
 def is_between(number: int, arr: List[int]) -> bool:
