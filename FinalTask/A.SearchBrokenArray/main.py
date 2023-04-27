@@ -1,8 +1,8 @@
 from typing import List
 
 
-def is_between(number: int, arr: List[int]) -> bool:
-    return arr[0] <= number <= arr[-1]
+def is_between(number: int, array: List[int]) -> bool:
+    return array[0] <= number <= array[-1]
 
 
 def get_answer(number: int, mid=0) -> int:
@@ -27,7 +27,8 @@ def broken_search(nums: List[int], target: int) -> int:
 
     if is_between(target, left) and (left[-1] > left[0] or len(left) == 1):
         return get_answer(broken_search(left, target))
-    elif is_between(target, right) and (right[-1] > right[0] or len(right) == 1):
+    elif is_between(target, right) and (
+            right[-1] > right[0] or len(right) == 1):
         return get_answer(broken_search(right, target), mid)
     elif right[-1] < right[0]:
         return get_answer(broken_search(right, target), mid)
@@ -35,6 +36,42 @@ def broken_search(nums: List[int], target: int) -> int:
         return get_answer(broken_search(left, target))
     else:
         return -1
+
+
+def broken_search2(nums: List[int], target: int) -> int:
+    length: int = len(nums)
+    first: int = 0
+    mid: int = length // 2
+    end: int = length
+
+    while True:
+        if end - first <= 2:
+            if nums[first] == target:
+                return first
+            if nums[mid] == target:
+                return mid
+            return -1
+
+        if is_between(target, nums[first:mid]) and (
+                nums[mid - 1] > nums[first] or (mid - first) == 1):
+            end = mid
+            mid = (end + first) // 2
+
+        elif is_between(target, nums[mid:end]) and (
+                nums[end - 1] > nums[mid] or (end - first) == 1):
+            first = mid
+            mid = (end + mid) // 2
+
+        elif nums[mid] < nums[first]:
+            end = mid
+            mid = (end + first) // 2
+
+        elif nums[end - 1] < nums[mid]:
+            first = mid
+            mid = (end + mid) // 2
+
+        else:
+            return -1
 
 
 def test():
@@ -57,5 +94,38 @@ def test():
     assert broken_search(arr, 5) == 4
 
 
+def test2():
+    arr = [19, 21, 100, 101, 102, 103, 3, 5, 7, 12]
+    assert broken_search2(arr, 20) == -1
+    assert broken_search2(arr, 21) == 1
+    arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
+    assert broken_search2(arr, 5) == 6
+    assert broken_search2(arr, 1235) == -1
+    arr = [19, 21, 100, 101, 102, 103, 3, 5, 7, 12]
+    assert broken_search2(arr, 5) == 7
+    assert broken_search2(arr, 21) == 1
+    arr = [19, 21, 100, 0, 1, 2, 3, 5, 7, 12]
+    assert broken_search2(arr, 21) == 1
+    assert broken_search2(arr, 221) == -1
+    arr = [0]
+    assert broken_search2(arr, 0) == 0
+    assert broken_search2(arr, 1) == -1
+    arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+    assert broken_search2(arr, 5) == 4
+
+
+def load_data():
+    file = open('./input.txt', 'rt')
+    _ = file.readline()
+    target = int(file.readline())
+    numbers = [int(x) for x in file.readline().strip().split()]
+    return numbers, target
+
+
 if __name__ == "__main__":
     test()
+    test2()
+    arr, tar = load_data()
+    d = broken_search2(arr, tar)
+    print(d, 'answer')
+    assert broken_search2(arr, 25) == 69
