@@ -40,3 +40,20 @@ def merge_sort(array):
 if __name__ == "__main__":
     arr = [4, 5, 1, 9, 2, 7]
     print(merge_sort(arr))
+
+
+
+def binary_search(array: List[int], val: int) -> int:
+    first = 0
+    last = len(array) - 1
+    index = -1
+    while (first <= last) and (index == -1):
+        mid = (first + last) // 2
+        if array[mid] == val:
+            index = mid
+        else:
+            if val < array[mid]:
+                last = mid - 1
+            else:
+                first = mid + 1
+    return index
