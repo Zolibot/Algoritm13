@@ -122,6 +122,30 @@ def load_data():
     return numbers, target
 
 
+def binary_search(array: List[int], val: int) -> int:
+    first = 0
+    last = len(array) - 1
+    index = -1
+    while (first <= last) and (index == -1):
+        mid = (first + last) // 2
+        if array[mid] == val:
+            index = mid
+        else:
+            if val < array[mid]:
+                last = mid - 1
+            else:
+                first = mid + 1
+    return index
+
+
+def get_clean_array(array: List[int]) -> List[int]:
+    length: int = len(array)
+    first: int = 0
+    mid: int = length // 2
+    end: int = length
+    pass
+
+
 if __name__ == "__main__":
     test()
     test2()
@@ -129,3 +153,5 @@ if __name__ == "__main__":
     d = broken_search2(arr, tar)
     print(d, 'answer')
     assert broken_search2(arr, 25) == 69
+    arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+    assert binary_search(arr, 5) == 4
