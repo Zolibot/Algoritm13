@@ -38,6 +38,10 @@ def broken_search(nums: List[int], target: int) -> int:
         return -1
 
 
+def is_between2(number: int, array: List[int], index_start: int, index_end: int) -> bool:
+    return array[index_start] <= number <= array[index_end]
+
+
 def broken_search2(nums: List[int], target: int) -> int:
     length: int = len(nums)
     first: int = 0
@@ -52,12 +56,12 @@ def broken_search2(nums: List[int], target: int) -> int:
                 return mid
             return -1
 
-        if is_between(target, nums[first:mid]) and (
+        if is_between2(target, nums, first, mid-1) and (
                 nums[mid - 1] > nums[first] or (mid - first) == 1):
             end = mid
             mid = (end + first) // 2
 
-        elif is_between(target, nums[mid:end]) and (
+        elif is_between2(target, nums, mid, end-1) and (
                 nums[end - 1] > nums[mid] or (end - first) == 1):
             first = mid
             mid = (end + mid) // 2
@@ -115,7 +119,7 @@ def test2():
 
 
 def load_data():
-    file = open('./input.txt', 'rt')
+    file = open('./FinalTask/A.SearchBrokenArray/input.txt', 'rt')
     _ = file.readline()
     target = int(file.readline())
     numbers = [int(x) for x in file.readline().strip().split()]
@@ -136,14 +140,6 @@ def binary_search(array: List[int], val: int) -> int:
             else:
                 first = mid + 1
     return index
-
-
-def get_clean_array(array: List[int]) -> List[int]:
-    length: int = len(array)
-    first: int = 0
-    mid: int = length // 2
-    end: int = length
-    pass
 
 
 if __name__ == "__main__":

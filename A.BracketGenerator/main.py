@@ -1,5 +1,5 @@
 def load_data():
-    file = open('./input.txt', 'rt')
+    file = open('./A.BracketGenerator/input.txt', 'rt')
     return int(file.read())
 
 
