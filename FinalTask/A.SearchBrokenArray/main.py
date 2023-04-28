@@ -46,7 +46,7 @@ def broken_search(nums: List[int], goal: int) -> int:
             return -1
 
 
-def test2():
+def test():
     arr = [19, 21, 100, 101, 102, 103, 3, 5, 7, 12]
     assert broken_search(arr, 20) == -1
     assert broken_search(arr, 21) == 1
@@ -66,17 +66,5 @@ def test2():
     assert broken_search(arr, 5) == 4
 
 
-def load_data():
-    file = open('./FinalTask/A.SearchBrokenArray/input.txt', 'rt')
-    _ = file.readline()
-    target = int(file.readline())
-    numbers = [int(x) for x in file.readline().strip().split()]
-    return numbers, target
-
-
 if __name__ == "__main__":
-    test2()
-    arr, tar = load_data()
-    d = broken_search(arr, tar)
-    print(d, 'answer')
-    assert broken_search(arr, 4) == 4
+    test()
