@@ -1,4 +1,4 @@
-# 86570852
+# 86689404
 from typing import List, Tuple
 
 
@@ -7,43 +7,31 @@ def is_between(num: int, array: List[int], first: int, second: int) -> bool:
 
 
 def is_rise(array: List[int], first: int, second: int) -> bool:
-    return array[second] > array[first]
+    return array[second] >= array[first]
 
 
 def broken_search(nums: List[int], goal: int) -> int:
-    length: int = len(nums)
     first: int = 0
-    mid: int = length // 2
-    end: int = length
+    end: int = len(nums) - 1
 
-    def to_left():
-        nonlocal end, mid, first
-        end = mid
+    while first <= end:
         mid = (end + first) // 2
 
-    def to_right():
-        nonlocal end, mid, first
-        first = mid
-        mid = (end + mid) // 2
-
-    while end - first >= 2:
         if nums[mid] == goal:
             return mid
 
-        if is_between(goal, nums, first, mid):
-            if is_rise(nums, first, mid):
-                to_left()
-        elif is_between(goal, nums, mid, end-1):
-            if is_rise(nums, mid, end):
-                to_right()
-        elif not is_rise(nums, first, mid):
-            to_left()
-        elif not is_rise(nums, mid, end):
-            to_right()
+        if is_rise(nums, first, mid):
+            if is_between(goal, nums, first, mid):
+                end = mid - 1
+            else:
+                first = mid + 1
+        else:
+            if is_between(goal, nums, mid, end):
+                first = mid + 1
+            else:
+                end = mid - 1
 
     return -1
-
-
 
 
 def test():
@@ -64,6 +52,8 @@ def test():
     assert broken_search(arr, 1) == -1
     arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
     assert broken_search(arr, 5) == 4
+    arr = [5, 1]
+    assert broken_search(arr, 1) == 1
 
 
 def load_data() -> Tuple[List[int], int]:
@@ -75,5 +65,5 @@ def load_data() -> Tuple[List[int], int]:
 
 if __name__ == "__main__":
     test()
-    # array, number = load_data()
-    # print(broken_search(array, number))
+    array, number = load_data()
+    print(broken_search(array, number))
