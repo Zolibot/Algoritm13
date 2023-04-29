@@ -1,5 +1,5 @@
 # 86570852
-from typing import List
+from typing import List, Tuple
 
 
 def is_between(num: int, array: List[int], first: int, second: int) -> bool:
@@ -7,7 +7,7 @@ def is_between(num: int, array: List[int], first: int, second: int) -> bool:
 
 
 def is_rise(array: List[int], first: int, second: int) -> bool:
-    return array[second - 1] > array[first] or (second - first) == 1
+    return array[second] > array[first]
 
 
 def broken_search(nums: List[int], goal: int) -> int:
@@ -26,24 +26,24 @@ def broken_search(nums: List[int], goal: int) -> int:
         first = mid
         mid = (end + mid) // 2
 
-    while True:
-        if end - first <= 2:
-            if nums[first] == goal:
-                return first
-            if nums[mid] == goal:
-                return mid
-            return -1
+    while end - first >= 2:
+        if nums[mid] == goal:
+            return mid
 
-        if is_between(goal, nums, first, mid-1) and is_rise(nums, first, mid):
-            to_left()
-        elif is_between(goal, nums, mid, end-1) and is_rise(nums, mid, end):
-            to_right()
+        if is_between(goal, nums, first, mid):
+            if is_rise(nums, first, mid):
+                to_left()
+        elif is_between(goal, nums, mid, end-1):
+            if is_rise(nums, mid, end):
+                to_right()
         elif not is_rise(nums, first, mid):
             to_left()
         elif not is_rise(nums, mid, end):
             to_right()
-        else:
-            return -1
+
+    return -1
+
+
 
 
 def test():
@@ -66,5 +66,14 @@ def test():
     assert broken_search(arr, 5) == 4
 
 
+def load_data() -> Tuple[List[int], int]:
+    _ = int(input())
+    target = int(input())
+    data = [int(number) for number in input().split()]
+    return data, target
+
+
 if __name__ == "__main__":
     test()
+    # array, number = load_data()
+    # print(broken_search(array, number))

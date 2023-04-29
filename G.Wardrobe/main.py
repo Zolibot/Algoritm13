@@ -8,7 +8,7 @@ def load_data() -> Tuple[int, List[int]]:
     return length, arr
 
 
-def counting_sort(length: int, arr: List[int]) -> List[int]:
+def counting_sort(length: int, arr: List[int]) -> None:
     if length <= 1:
         return None
     counted_values: List[int] = [0] * (max(arr) + 1)
