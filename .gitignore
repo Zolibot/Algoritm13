@@ -4,3 +4,4 @@ venv/
 .vscode/
 /.vscode/
 .ipynb_checkpoints/
+.mypy_cache/
