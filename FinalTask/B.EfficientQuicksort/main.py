@@ -1,4 +1,4 @@
-# 86799337
+# 86805826
 from random import randrange
 from typing import List
 
@@ -32,10 +32,11 @@ def _partition(array: List[Member], low: int, high: int) -> int:
 def quicksort(array: List[Member], low=0, high=None) -> None:
     if high is None:
         high = len(array) - 1
-    if low < high:
-        top_point: int = _partition(array, low, high)
-        quicksort(array, low, top_point - 1)
-        quicksort(array, top_point + 1, high)
+    if low >= high:
+        return
+    top_point: int = _partition(array, low, high)
+    quicksort(array, low, top_point - 1)
+    quicksort(array, top_point + 1, high)
 
 
 def load_data() -> List[Member]:
