@@ -1,18 +1,18 @@
-# 86758263
-from collections import namedtuple
+# 86799337
 from random import randrange
 from typing import List
-
-Info = namedtuple('Competitor', 'task fine name')
 
 
 class Member:
 
     def __init__(self, name_member: str, task: str, fine: str) -> None:
-        self.data = Info(-int(task), int(fine),  name_member)
+        self.data = (-int(task), int(fine),  name_member)
+
+    def __lt__(self, other):
+        return self.data > other.data
 
     def __str__(self) -> str:
-        return self.data.name
+        return self.data[2]
 
 
 def _partition(array: List[Member], low: int, high: int) -> int:
