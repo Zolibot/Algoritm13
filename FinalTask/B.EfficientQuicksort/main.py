@@ -6,13 +6,16 @@ from typing import List
 class Member:
 
     def __init__(self, name_member: str, task: str, fine: str) -> None:
-        self.data = (-int(task), int(fine),  name_member)
+        self.name = name_member
+        self.task = -int(task)
+        self.fine = int(fine)
+        self.data = (self.task, self.fine, self.name)
 
     def __lt__(self, other):
-        return self.data > other.data
+        return self.data < other.data
 
     def __str__(self) -> str:
-        return self.data[2]
+        return self.name
 
 
 def _partition(array: List[Member], low: int, high: int) -> int:
@@ -21,7 +24,7 @@ def _partition(array: List[Member], low: int, high: int) -> int:
     pivot: int = high
     great_num: int = low - 1
     for index in range(low, high):
-        if array[index].data < array[pivot].data:
+        if array[index] < array[pivot]:
             great_num += 1
             array[great_num], array[index] = array[index], array[great_num]
     great_num += 1
